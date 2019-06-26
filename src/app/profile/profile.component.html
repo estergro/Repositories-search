@@ -1,0 +1,127 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+
+
+  <!--Nav Bar At The Top-->
+
+<nav  class="navbar navbar-inverse navbar-fixed-top" style="height: 7%;">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+            aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <a style="list-style: none;" class="navbar-brand" href="#">
+              <li>
+                <img id="anim" src="assets/images/duck.gif" alt="github image" height="80" width="80" style=" margin-top: -20%;">
+              </li>
+            </a>
+
+            <ul class="navbar-nav">
+              
+                <li><form action=""><div class="form-group"><input type="text" style="margin-top: 7%;  width: 130%; height: 15%;background-color: rgb(70, 68, 68); border: none; color: ghostwhite;" class="form-control header-search-input jump-to-field js-jump-to-field js-site-search-focus  " placeholder="search or jump to" [(ngModel)]="username" name="username"  (keyup.Enter)="findProfile()"></div></form></li>
+            </ul>
+        </div>
+       
+    </div>
+</nav>
+
+<!--/.nav-collapse -->
+
+
+<!-- CONTENT SECTION -->
+
+<!-- Profile And Location On Panel -->
+<div *ngIf="profile">
+  <div style="margin-top: 10%;" class="panel panel-default">
+
+    <div class="panel-heading">
+        <h1>{{profile.login}}</h1>
+      <span *ngIf="">Works at {{profile.company}}</span> {{profile.location}}
+    </div>
+<!-- Collapse Profile And Location On Panel -->
+
+
+<!--following, public gist, Followers, Following -->
+    <div class="panel-body">
+
+      <div class="row">
+        <div class="col-md-4">
+          <img src="{{profile.avatar_url}}" class="img-thumbnail github-avatar" alt="Profile Image">
+        </div>
+        <div class="col-md-8">
+          <div class="start">
+              <span class="label label-default">{{profile.public_repos}} Public Repos</span>
+              <span class="label label-primary">{{profile.public_gist}} Public Gist</span>
+              <span class="label label-success">{{profile.followers}} Followers</span>
+              <span class="label label-info">{{profile.following}} Following</span>
+              <br>
+
+          <!-- Content With User-info -->
+
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Username:</strong> {{profile.login}}</li>
+                <li class="list-group-item"><strong>Location:</strong> {{profile.location}}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{profile.email}}</li>
+                <li class="list-group-item"><strong>Bio:</strong> {{profile.bio}}</li>
+                <li class="list-group-item"><strong>Member Since:</strong> {{profile.created_at}}</li>
+            </ul>
+
+          <!-- Collapse Content With User-info -->
+
+          </div>
+        </div>
+
+<!--Collapse following, public gist, Followers, Following -->
+
+
+<!-- REPOSITORIES -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Repositories</h3>
+            </div>
+        <div class="panel-body">
+            <div class="row">
+                    <!-- Looop To Display Repos -->
+                    <div class="col-md-12">
+                        <div *ngFor="let repo of repos">
+                            <div class="row">
+                                
+                                <!-- Div To Display Repositories -->
+                                <div class="col-md-9">
+                                    <!-- Repo Name -->
+                                    <h3>{{repo.name}}</h3>
+                                    <!-- Repo Description -->
+                                    <p>{{repo.description}}</p>
+                                    <!-- View on Github Button -->
+
+                                    <h4><a href="{{repo.html_url}}" target="_blank">View on github</a></h4>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <span class="label label-default">{{repo.watchers}} Stars </span>
+                                    <span class="label label-primary">{{repo.forks}} Forks </span>
+                                </div>
+
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- COLLAPSE REPOSITORIES -->
