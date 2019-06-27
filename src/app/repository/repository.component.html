@@ -65,7 +65,8 @@
                                 <div class="col-md-3">
                                    <!-- <span class="label label-default">{{repo.watchers}} Stars </span>
                                     <span class="label label-primary">{{repo.forks}} Forks </span>-->
-                                                                             
+                                    <button className="bookButton" (click)="bookmarkRepo(repo)" [ngClass]="repo.isbookmark ? 'bookmark' : 'bookmarked'">{{repo.bookmark}}</button>
+                                    
                                 </div>
 
                             </div>

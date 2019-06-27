@@ -9,16 +9,14 @@ import { from } from 'rxjs';
   styleUrls: ['./repository.component.css']
 })
 export class RepositoryComponent implements OnInit {
-  repos: any[];
+  repos: {name:'', isbookmark: false,
+  bookmark:  "bookmark"};
  reponame: string;
- checked: boolean;
+ 
  public bookmarksRepo:any=[]
 
   constructor(private service: RepositoryService) { //, private storage: WebStorageService
-    this.service.getRepos().subscribe(repos => {
-      console.log(repos);
-      this.repos = repos.items;
-    });
+    
   }
   findRepo() {
     this.service.updateRepo(this.reponame);
@@ -28,20 +26,22 @@ export class RepositoryComponent implements OnInit {
     });
   }
 
-BookmarkRepo(key, val){
-  //this.storage.set(key, val);
-  //this.bookmarksRepo[key]= this.storage.get(key);
-
-  //sessionStorage.setItem('bookmarkRepo', 'value');
-
-// Get saved data from sessionStorage
-//let data = sessionStorage.getItem('key');
-
-// Remove saved data from sessionStorage
-//sessionStorage.removeItem('key');
+bookmarkRepo(repo){
+  if(!repo.isbookmark)
+    {
+      sessionStorage.setItem(repo.name, JSON.stringify(repo));
+      repo.bookmark ="bookmarked";
+    }
+  else 
+    {
+      sessionStorage.removeItem(repo.name);
+      repo.bookmark ="bookmark";
+    }
+    repo.isbookmark = !repo.isbookmark       
 }
 
   ngOnInit() {
+    
     this.service.getRepos().subscribe(repos => {
       console.log(repos);
       this.repos = repos.items;
