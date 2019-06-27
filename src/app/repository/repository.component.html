@@ -59,15 +59,17 @@
                                     <img src="{{repo.owner.avatar_url}}" class="img-thumbnail github-avatar" alt="Repo Image">
                                     <!-- View on Github Button -->
 
-                                    <h4><a href="{{repo.html_url}}" target="_blank">View on github</a></h4>
+                                    <h4><a class="git_url" href="{{repo.html_url}}" target="_blank">View on github</a></h4>
                                 </div>
-
                                 <div class="col-md-3">
-                                   <!-- <span class="label label-default">{{repo.watchers}} Stars </span>
-                                    <span class="label label-primary">{{repo.forks}} Forks </span>-->
-                                    <button className="bookButton" (click)="bookmarkRepo(repo)" [ngClass]="repo.isbookmark ? 'bookmark' : 'bookmarked'">{{repo.bookmark}}</button>
-                                    
+                                <div >
+                                    <span class="label label-default">{{repo.watchers}} Stars </span>
+                                    <span class="label label-primary">{{repo.forks}} Forks </span>
                                 </div>
+                                <div >    
+                                    <img class="bookmark" (click)="bookmarkRepo(repo)" src="/assets/images/{{repo.bookmark}}.png"  alt="Repo Image">
+                                </div>
+                            </div>
 
                             </div>
                             <hr>

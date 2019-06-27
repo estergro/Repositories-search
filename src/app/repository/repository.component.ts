@@ -22,7 +22,12 @@ export class RepositoryComponent implements OnInit {
     this.service.updateRepo(this.reponame);
     this.service.getRepos().subscribe(repos => {
       console.log(repos);
-      this.repos = repos.items;
+      this.repos = repos.items.map((repo) => {
+        repo.bookmark = "bookmark";
+        repo.isbookmark =  false;
+        return repo;
+    });
+      
     });
   }
 
@@ -44,7 +49,11 @@ bookmarkRepo(repo){
     
     this.service.getRepos().subscribe(repos => {
       console.log(repos);
-      this.repos = repos.items;
+      this.repos = repos.items.map((repo) => {
+        repo.bookmark = "bookmark";
+        repo.isbookmark =  false;
+        return repo;
+    });
     });
   }
 

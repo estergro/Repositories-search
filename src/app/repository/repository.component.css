@@ -12,5 +12,10 @@ h1 {
 margin-top: 15%;
 }
 .bookmark{
-  background-color: yellow;
+  margin: 7px 0 0 19px;
+  width: 50%;
+}
+
+.git_url{
+  padding-left: 10%;
 }
