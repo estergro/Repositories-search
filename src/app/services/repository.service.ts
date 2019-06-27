@@ -10,7 +10,7 @@ export class RepositoryService {
 
   constructor(private http: Http) {
     console.log('service is now ready');
-    this.repo = 'GitHub-repositories-search';
+    this.repo = 'Repositories-search';
   }
 
   getRepos() {
