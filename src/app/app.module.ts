@@ -7,7 +7,9 @@ import { RepositoryService } from './services/repository.service';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { AppComponent } from './app.component';
 
-import { RepositoryComponent } from './repository/repository.component';
+import { RepositoryComponent } from './components/repository/repository.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BookmarkRepositoriesComponent } from './components/bookmark-repositories/bookmark-repositories.component';
 
 
 
@@ -15,14 +17,17 @@ import { RepositoryComponent } from './repository/repository.component';
   declarations: [
     AppComponent,
     
-    RepositoryComponent
+    RepositoryComponent,
+
+    BookmarkRepositoriesComponent
     
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    StorageServiceModule
+    StorageServiceModule,
+    AppRoutingModule
   ],
   providers: [RepositoryService],
   bootstrap: [AppComponent]

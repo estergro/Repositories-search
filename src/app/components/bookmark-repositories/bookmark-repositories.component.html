@@ -1,0 +1,42 @@
+<!--BOOKMARK REPOSITORIES -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Repositories</h3>
+    </div>
+<div class="panel-body">
+    <div class="row">
+            <!-- Looop To Display Repos -->
+            <div class="col-md-12">
+                <div *ngFor="let repo of repos">
+                    <div class="row">
+                        
+                        <!-- Div To Display Repositories -->
+                        <div class="col-md-9">
+                            <!-- Repo Name -->
+                            <h3>{{repo.name}}</h3>
+                            <!-- Repo avatar -->
+                            <img src="{{repo.owner.avatar_url}}" class="img-thumbnail github-avatar" alt="Repo Image">
+                            <!-- View on Github Button -->
+
+                            <h4><a class="git_url" href="{{repo.html_url}}" target="_blank">View on github</a></h4>
+                        </div>
+                        <div class="col-md-3">
+                        <div >
+                            <span class="label label-default">{{repo.watchers}} Stars </span>
+                            <span class="label label-primary">{{repo.forks}} Forks </span>
+                        </div>
+                        <div >    
+                            <img class="bookmark" (click)="bookmarkRepo(repo)" src="/assets/images/{{repo.bookmark}}.png"  alt="Repo Image">
+                        </div>
+                    </div>
+
+                    </div>
+                    <hr>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+
+
+<!-- COLLAPSE BOOKMARK REPOSITORIES -->
