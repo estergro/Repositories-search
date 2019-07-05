@@ -1,13 +1,20 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+  <nav  class="navbar navbar-inverse navbar-fixed-top" style="height: 7%;">
+        <div class="container">
+  <a [routerLink]="['/repositories']">Go Back</a>
+        </div>
+  </nav>
 <!--BOOKMARK REPOSITORIES -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Repositories</h3>
+        <h3 class="panel-title">Bookmark Repositories</h3>
     </div>
 <div class="panel-body">
     <div class="row">
             <!-- Looop To Display Repos -->
             <div class="col-md-12">
-                <div *ngFor="let repo of repos">
+                <div *ngFor="let repo of bookmarksRepos">
                     <div class="row">
                         
                         <!-- Div To Display Repositories -->

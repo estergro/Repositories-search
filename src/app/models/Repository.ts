@@ -1,7 +1,7 @@
 export class Repository{
     name:string;
     isbookmark: boolean = false;
-    pbookmark:  string = "bookmark";
+    bookmark:  string = "bookmark";
 
   constructor(){ }
 }

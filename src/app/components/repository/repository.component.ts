@@ -12,10 +12,10 @@ import {Repository} from '../../models/Repository'
 export class RepositoryComponent implements OnInit {
   repos: Repository[];
   search_name: string;
+ public bookmarkRepos:any[]=[];
  
- public bookmarksRepo:any=[]
 
-  constructor(private service: RepositoryService) { //, private storage: WebStorageService
+  constructor(private service: RepositoryService) { 
     
   }
   findRepo() {
@@ -24,8 +24,13 @@ export class RepositoryComponent implements OnInit {
       console.log(repos);
       this.repos = repos.items.map((repo) => {
         repo.bookmark = "bookmark";
+        const index: number = this.bookmarkRepos.indexOf(repo);
+      if (index !== -1) {
+        repo.isbookmark =  true;
+      }
+      else
         repo.isbookmark =  false;
-        return repo;
+      return repo;
     });
       
     });
@@ -34,23 +39,32 @@ export class RepositoryComponent implements OnInit {
 bookmarkRepo(repo){
   if(!repo.isbookmark)
     {
-      sessionStorage.setItem('cart', JSON.stringify(repo));
+      this.bookmarkRepos.push(repo);
+      window.localStorage.setItem('repositories', JSON.stringify(this.bookmarkRepos));
       repo.bookmark ="bookmarked";
     }
   else 
     {
-      sessionStorage.removeItem(repo.name);
+      const index: number = this.bookmarkRepos.indexOf(repo);
+      if (index !== -1) {
+          this.bookmarkRepos.splice(index, 1);}
+          window.localStorage.setItem('repositories', JSON.stringify(this.bookmarkRepos));
       repo.bookmark ="bookmark";
     }
     repo.isbookmark = !repo.isbookmark       
 }
 
   ngOnInit() {
-    
-    this.service.getRepos().subscribe(repos => {
+    window.localStorage.setItem('repositories', '');
+        this.service.getRepos().subscribe(repos => {
       console.log(repos);
       this.repos = repos.items.map((repo) => {
         repo.bookmark = "bookmark";
+        const index: number = this.bookmarkRepos.indexOf(repo);
+      if (index !== -1) {
+        repo.isbookmark =  true;
+      }
+      else
         repo.isbookmark =  false;
         return repo;
     });

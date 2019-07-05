@@ -30,9 +30,12 @@
                     <input type="text" style="margin-top: 7%;  width: 130%; height: 15%;background-color: rgb(70, 68, 68); border: none; color: ghostwhite;" class="form-control header-search-input jump-to-field js-jump-to-field js-site-search-focus  " placeholder="search or jump to" [(ngModel)]="reponame" name="reponame"  (keyup.Enter)="findRepo()"></div></form></li>
             </ul>
         </div>
-       
+        <a [routerLink]="['/bookmarks']">Show All Bookmarks</a>
     </div>
 </nav>
+
+
+
 
 <!--/.nav-collapse -->
 
