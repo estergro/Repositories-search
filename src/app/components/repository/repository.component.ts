@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '../../services/repository.service';
 import { from } from 'rxjs';
 import {Repository} from '../../models/Repository'
-//import {SESSION_STORAGE, WebStorageService} from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-repository',
@@ -12,7 +11,7 @@ import {Repository} from '../../models/Repository'
 export class RepositoryComponent implements OnInit {
   repos: Repository[];
   search_name: string;
- public bookmarkRepos:any[]=[];
+  bookmarksRepos: Repository[]=[];
  
 
   constructor(private service: RepositoryService) { 
@@ -23,13 +22,15 @@ export class RepositoryComponent implements OnInit {
     this.service.getRepos().subscribe(repos => {
       console.log(repos);
       this.repos = repos.items.map((repo) => {
-        repo.bookmark = "bookmark";
-        const index: number = this.bookmarkRepos.indexOf(repo);
-      if (index !== -1) {
+        
+        let repIsBookmark = this.bookmarksRepos.find(ob => ob.id === repo.id);
+      if (repIsBookmark) {
         repo.isbookmark =  true;
+        repo.bookmark = "bookmarked";
       }
-      else
+      else{
         repo.isbookmark =  false;
+        repo.bookmark = "bookmark";}
       return repo;
     });
       
@@ -39,36 +40,44 @@ export class RepositoryComponent implements OnInit {
 bookmarkRepo(repo){
   if(!repo.isbookmark)
     {
-      this.bookmarkRepos.push(repo);
-      window.localStorage.setItem('repositories', JSON.stringify(this.bookmarkRepos));
+      const index: number = this.bookmarksRepos.indexOf(repo);
+      if (index == -1) {
+      this.bookmarksRepos.push(repo);
+      sessionStorage.setItem('repositories', JSON.stringify(this.bookmarksRepos));
       repo.bookmark ="bookmarked";
+    }
     }
   else 
     {
-      const index: number = this.bookmarkRepos.indexOf(repo);
+      const index: number = this.bookmarksRepos.indexOf(repo);
       if (index !== -1) {
-          this.bookmarkRepos.splice(index, 1);}
-          window.localStorage.setItem('repositories', JSON.stringify(this.bookmarkRepos));
+          this.bookmarksRepos.splice(index, 1);}
+          sessionStorage.setItem('repositories', JSON.stringify(this.bookmarksRepos));
       repo.bookmark ="bookmark";
     }
     repo.isbookmark = !repo.isbookmark       
 }
 
   ngOnInit() {
-    window.localStorage.setItem('repositories', '');
-        this.service.getRepos().subscribe(repos => {
-      console.log(repos);
-      this.repos = repos.items.map((repo) => {
-        repo.bookmark = "bookmark";
-        const index: number = this.bookmarkRepos.indexOf(repo);
-      if (index !== -1) {
-        repo.isbookmark =  true;
-      }
-      else
-        repo.isbookmark =  false;
-        return repo;
-    });
-    });
+    this.loadBookmarkrepos();
+      this.findRepo();
+    
   }
+  loadBookmarkrepos(): void {
+    let bookmarks = sessionStorage.getItem('repositories');
+    if(bookmarks)
+    {
+      this.bookmarksRepos = JSON.parse(bookmarks).map((bookrepo) => {
+      bookrepo.bookmark = "bookmarked";
+      bookrepo.isbookmark =  true;
+        return bookrepo;
+    });
+
+  }
+    else{
+      sessionStorage.setItem('repositories', '');
+    }
+  }
+  
 
 }

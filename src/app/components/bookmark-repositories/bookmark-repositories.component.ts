@@ -17,10 +17,10 @@ export class BookmarkRepositoriesComponent implements OnInit {
     this.loadBookmarkrepos();
      }
   loadBookmarkrepos(): void {
-		let bookmarks = JSON.parse(window.localStorage.getItem('repositories'));
+		let bookmarks = sessionStorage.getItem('repositories');
     if(bookmarks)
     {
-      this.bookmarksRepos = bookmarks.map((repo) => {
+      this.bookmarksRepos = JSON.parse(bookmarks).map((repo) => {
         repo.bookmark = "bookmarked";
         repo.isbookmark =  true;
         return repo;
@@ -34,7 +34,7 @@ export class BookmarkRepositoriesComponent implements OnInit {
         const index: number = this.bookmarksRepos.indexOf(repo);
         if (index !== -1) {
             this.bookmarksRepos.splice(index, 1);}
-            window.localStorage.setItem('repositories', JSON.stringify(this.bookmarksRepos));
+            sessionStorage.setItem('repositories', JSON.stringify(this.bookmarksRepos));
         repo.bookmark ="bookmark";
       
       repo.isbookmark = !repo.isbookmark    

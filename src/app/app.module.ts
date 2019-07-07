@@ -16,10 +16,10 @@ import { BookmarkRepositoriesComponent } from './components/bookmark-repositorie
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     RepositoryComponent,
 
-    BookmarkRepositoriesComponent
+        BookmarkRepositoriesComponent
     
   ],
   imports: [
