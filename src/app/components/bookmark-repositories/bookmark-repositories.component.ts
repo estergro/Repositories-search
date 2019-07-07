@@ -29,6 +29,7 @@ export class BookmarkRepositoriesComponent implements OnInit {
     }
 	}
 
+  //REMOVE FROM BOOKMARKS  //need to add confirmation-dialog....
   bookmarkRepo(repo){
     
         const index: number = this.bookmarksRepos.indexOf(repo);

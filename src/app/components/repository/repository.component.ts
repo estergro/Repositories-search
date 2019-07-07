@@ -10,7 +10,7 @@ import {Repository} from '../../models/Repository'
 })
 export class RepositoryComponent implements OnInit {
   repos: Repository[];
-  search_name: string;
+  reponame: string;
   bookmarksRepos: Repository[]=[];
  
 
@@ -18,7 +18,7 @@ export class RepositoryComponent implements OnInit {
     
   }
   findRepo() {
-    this.service.updateRepo(this.search_name);
+    this.service.updateRepo(this.reponame);
     this.service.getRepos().subscribe(repos => {
       console.log(repos);
       this.repos = repos.items.map((repo) => {
@@ -59,11 +59,12 @@ bookmarkRepo(repo){
 }
 
   ngOnInit() {
-    this.loadBookmarkrepos();
+    this.loadBookmarkRepos();
       this.findRepo();
     
   }
-  loadBookmarkrepos(): void {
+
+  loadBookmarkRepos(): void {
     let bookmarks = sessionStorage.getItem('repositories');
     if(bookmarks)
     {

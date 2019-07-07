@@ -8,15 +8,7 @@
 
 <nav  class="navbar navbar-inverse navbar-fixed-top" style="height: 7%;">
     <div class="container">
-      <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-            aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-      </div>
+     
         <div id="navbar" class="collapse navbar-collapse">
             <a style="list-style: none;" class="navbar-brand" href="#">
               <li>
@@ -28,10 +20,13 @@
               
                 <li><form action=""><div class="form-group">
                     <input type="text" style="margin-top: 7%;  width: 130%; height: 15%;background-color: rgb(70, 68, 68); border: none; color: ghostwhite;" class="form-control header-search-input jump-to-field js-jump-to-field js-site-search-focus  " placeholder="search or jump to" [(ngModel)]="reponame" name="reponame"  (keyup.Enter)="findRepo()"></div></form></li>
-            </ul>
+            </ul>  
         </div>
-        <a [routerLink]="['/bookmarks']">Show All Bookmarks</a>
+      
     </div>
+    <a [routerLink]="['/bookmarks']">
+        <button class="btn btn-light">Show all bookmarks</button>
+    </a>
 </nav>
 
 
